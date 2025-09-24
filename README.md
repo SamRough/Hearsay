@@ -1,6 +1,6 @@
-# 小道消息验证器
+# Hearsay - 小道消息验证器
 
-一个基于React和Dify AI的智能小道消息可信度分析工具。
+一个基于React和Dify AI的智能小道消息可信度分析工具。An AI Agent that verifies stock hearsay.
 
 ## 功能特性
 
