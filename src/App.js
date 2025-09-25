@@ -3,11 +3,13 @@ import './App.css';
 import MessageInput from './components/MessageInput';
 import AnalysisResult from './components/AnalysisResult';
 import Header from './components/Header';
+import DifyChatbot from './components/DifyChatbot';
 import { analyzeMessageCredibility } from './services/difyApi';
 
 function App() {
   const [analysisResult, setAnalysisResult] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [showChatbot, setShowChatbot] = useState(false);
 
   const handleAnalyze = async (message) => {
     setIsLoading(true);
@@ -27,13 +29,24 @@ function App() {
     }
   };
 
+  const toggleView = () => {
+    setShowChatbot(!showChatbot);
+    setAnalysisResult(null);
+  };
+
   return (
     <div className="App">
-      <Header />
+      <Header onToggleView={toggleView} showChatbot={showChatbot} />
       <div className="main-content">
-        <MessageInput onAnalyze={handleAnalyze} isLoading={isLoading} />
-        {analysisResult && (
-          <AnalysisResult result={analysisResult} />
+        {showChatbot ? (
+          <DifyChatbot />
+        ) : (
+          <>
+            <MessageInput onAnalyze={handleAnalyze} isLoading={isLoading} />
+            {analysisResult && (
+              <AnalysisResult result={analysisResult} />
+            )}
+          </>
         )}
       </div>
     </div>
